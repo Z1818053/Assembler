@@ -11,7 +11,6 @@
 *
 *  2,3   Num 1 - Even Odd Pair
 *  4     Num 2
-*  6     Result
 * 10     Operation Type     
 * 15     Base Register
 ********************************************
@@ -19,12 +18,64 @@ MAIN     CSECT
          USING MAIN,15
 LOOP     XREAD BUFFER,80
          BC    B'0100',ENDLOOP  Ends loop if EOF reached
-*
+         XDECO 10,BUFFER        Read operation type
+         XDECI 3,0(1)           Read first num
+         XDECI 4,0(1)           Read second num
+         C     10,=F'1'         Is addition?
+         BE    ADD
+         C     10,=F'2'         Is subtraction?
+         BE    SUB
+         C     10,=F'3'         Is multiplication?
+         BE    MULT
+         C     10,=F'4'         Is division?
+         BE    DIV
+         B     LOOP             Back to top
+         SPACE
+ADD      
+         XPRNT ADDLINE,
+SUB
+         XPRNT SUBLINE,
+MULT
+         XPRNT MULTLINE,
+DIV
+         XPRNT DIVLINE,
 *
 *
          BR    14
-         LTORG                  Sets the literal Origin
 BUFFER   DS    80C              Creates BUFFER variable
+         SPACE
+ADDLINE  DC    C'0'             Formats the ADDLINE output - 71 long
+         DC    C'Addition       '
+ANUM1    DS    12C
+ANUM2    DS    12C
+         DC    C'        Sum:       '
+ARES     DS    12C
+         SPACE
+SUBLINE  DC    C'0'             Formats the SUBLINE output - 71 long
+         DC    C'Subtraction    '
+SNUM1    DS    12C
+SNUM2    DS    12C
+         DC    C'        Difference:'
+SRES     DS    12C              
+         SPACE
+MULTLINE DC    C'0'             Formats the MULTLINE output - 71 long
+         DC    C'Multiplication:'
+MNUM1    DS    12C
+MNUM2    DS    12C
+         DC    C'        Product:   '
+MRES     DS    12C
+         SPACE
+DIVLINE  DC    C'0'             Formats the DIVLINE output - 91 long
+         DC    C'Division       '
+DNUM1    DS    12C
+DNUM2    DS    12C
+         DC    C'        Quotient:  '
+DRES     DS    12C
+         DC    C'        Remainder:'   
+DREM     DS    12C
+         LTORG                  Sets the literal Origin
+         SPACE
+
          END   MAIN
 /*
 //FT05F001 DD DSN=KC02314.AUTUMN17.CSCI360.HW3DATA,DISP=SHR
