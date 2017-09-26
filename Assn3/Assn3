@@ -1,0 +1,16 @@
+//KC03I36A JOB ,'Tommy Franczak',MSGCLASS=H
+//STEP1 EXEC PGM=ASSIST
+//STEPLIB DD DSN=KC02293.ASSIST.LOADLIB,DISP=SHR
+//SYSPRINT DD SYSOUT=*
+//SYSIN DD *
+********************************************
+* Assignment 3 - Pair Programmed
+* Names: Tommy Franczak, Matt Rycraft
+* 
+* Register Usage
+*
+********************************************
+
+/*
+//FT05F001 DD DSN=KC02314.AUTUMN17.CSCI360.HW3DATA,DISP=SHR
+//
