@@ -11,13 +11,22 @@
 *
 *  2,3   Num 1 - Even Odd Pair
 *  4     Num 2
-* 10     Operation Type     
+* 10     Operation Type
+* 11     Addition Count
+* 12     Subtraction Count
+* 13     Multiplication Count
+* 14     Division Count     
 * 15     Base Register
 ********************************************
 MAIN     CSECT
          USING MAIN,15
+         SR    3,3              Zero num1
+         SR    11,11            Zero Operation Counts
+         SR    12,12
+         SR    13,13
+         SR    14,14 
 LOOP     XREAD BUFFER,80
-         BC    B'0100',ENDLOOP  Ends loop if EOF reached
+         BC    B'0100',ENDLOOP  End loop if EOF reached
          XDECO 10,BUFFER        Read operation type
          XDECI 3,0(1)           Read first num
          XDECI 4,0(1)           Read second num
@@ -31,16 +40,34 @@ LOOP     XREAD BUFFER,80
          BE    DIV
          B     LOOP             Back to top
          SPACE
-ADD      
-         XPRNT ADDLINE,
-SUB
-         XPRNT SUBLINE,
-MULT
-         XPRNT MULTLINE,
-DIV
-         XPRNT DIVLINE,
-*
-*
+ADD      XDECO 3,ANUM1          Format first num for output
+         XDECO 4,ANUM2          Format second num for output
+         AR    3,4              Add both nums
+         XDECO 3,ARES           Format result for output
+         XPRNT ADDLINE,71       Print ADDLINE
+         A     11,=F'1'         Increment Addition Count
+         SPACE
+SUB      XDECO 3,SNUM1          Format first num for output
+         XDECO 4,SNUM2          Format second num for output
+         SR    3,4              Subtract both nums
+         XDECO 3,SRES           Format result for output
+         XPRNT SUBLINE,71       Print SUBLINE
+         A     12,=F'1'         Increment Subtraction Count
+         SPACE
+MULT     XDECO 3,MNUM1          Format first num for output
+         XDECO 4,MNUM2          Format second num for output
+         MR    2,4              Multiply both nums
+         XDECO 3,MRES           Format result for output
+         XPRNT MULTLINE,71      Prints MULTLINE output
+         A     13,=F'1'         Increment Multiplication Count
+         SPACE
+DIV      XDECO 3,DNUM1          Format first num for output
+         XDECO 4,DNUM2          Format second num for outpu
+         DR    2,4              Divide first num by second
+         XDECO 3,DRES           Format result for output
+         XDECO 4,DREM           Format remainder for output
+         XPRNT DIVLINE,91       Prints DIVLINE output
+         SPACE
          BR    14
 BUFFER   DS    80C              Creates BUFFER variable
          SPACE
