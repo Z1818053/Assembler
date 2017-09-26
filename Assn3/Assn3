@@ -9,8 +9,23 @@
 * 
 * Register Usage
 *
+*  2,3   Num 1 - Even Odd Pair
+*  4     Num 2
+*  6     Result
+* 10     Operation Type     
+* 15     Base Register
 ********************************************
-
+MAIN     CSECT
+         USING MAIN,15
+LOOP     XREAD BUFFER,80
+         BC    B'0100',ENDLOOP  Ends loop if EOF reached
+*
+*
+*
+         BR    14
+         LTORG                  Sets the literal Origin
+BUFFER   DS    80C              Creates BUFFER variable
+         END   MAIN
 /*
 //FT05F001 DD DSN=KC02314.AUTUMN17.CSCI360.HW3DATA,DISP=SHR
 //
