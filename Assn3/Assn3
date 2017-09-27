@@ -11,62 +11,68 @@
 *
 *  2,3   Num 1 - Even Odd Pair
 *  4     Num 2
-* 10     Operation Type
-* 11     Addition Count
-* 12     Subtraction Count
-* 13     Multiplication Count
-* 14     Division Count     
+*  9     Operation Type
+* 10     Addition Count
+* 11     Subtraction Count
+* 12     Multiplication Count
+* 13     Division Count     
 * 15     Base Register
 ********************************************
 MAIN     CSECT
          USING MAIN,15
-         SR    3,3              Zero num1
-         SR    11,11            Zero Operation Counts
+         SR    10,10            Zero Operation Counts
+         SR    11,11
          SR    12,12
-         SR    13,13
-         SR    14,14 
+         SR    13,13 
 LOOP     XREAD BUFFER,80
          BC    B'0100',ENDLOOP  End loop if EOF reached
-         XDECI 10,BUFFER        Read operation type
+         SR    2,2              Assure Even Odd Pair is zeroed
+         XDECI 9,BUFFER        Read operation type
          XDECI 3,0(1)           Read first num
          XDECI 4,0(1)           Read second num
-         C     10,=F'1'         Is addition?
+         C     9,=F'1'         Is addition?
          BE    ADD
-         C     10,=F'2'         Is subtraction?
+         C     9,=F'2'         Is subtraction?
          BE    SUB
-         C     10,=F'3'         Is multiplication?
+         C     9,=F'3'         Is multiplication?
          BE    MULT
-         C     10,=F'4'         Is division?
-         BE    DIV
-         B     LOOP             Back to top
+         C     9,=F'4'         Is division?
+         BE    DIV  
+AFTEROP  B     LOOP             Back to top
          SPACE
 ADD      XDECO 3,ANUM1          Format first num for output
          XDECO 4,ANUM2          Format second num for output
          AR    3,4              Add both nums
          XDECO 3,ARES           Format result for output
          XPRNT ADDLINE,71       Print ADDLINE
-         A     11,=F'1'         Increment Addition Count
+         A     10,=F'1'         Increment Addition Count
+         B     AFTEROP          Goes back to loop
          SPACE
 SUB      XDECO 3,SNUM1          Format first num for output
          XDECO 4,SNUM2          Format second num for output
          SR    3,4              Subtract both nums
          XDECO 3,SRES           Format result for output
          XPRNT SUBLINE,71       Print SUBLINE
-         A     12,=F'1'         Increment Subtraction Count
+         A     11,=F'1'         Increment Subtraction Count
+         B     AFTEROP          Goes back to loop
          SPACE
 MULT     XDECO 3,MNUM1          Format first num for output
          XDECO 4,MNUM2          Format second num for output
+         SR    2,2
          MR    2,4              Multiply both nums
          XDECO 3,MRES           Format result for output
          XPRNT MULTLINE,71      Prints MULTLINE output
-         A     13,=F'1'         Increment Multiplication Count
+         A     12,=F'1'         Increment Multiplication Count
+         B     AFTEROP          Goes back to loop
          SPACE
 DIV      XDECO 3,DNUM1          Format first num for output
-         XDECO 4,DNUM2          Format second num for outpu
+         XDECO 4,DNUM2          Format second num for output
          DR    2,4              Divide first num by second
          XDECO 3,DRES           Format result for output
-         XDECO 4,DREM           Format remainder for output
-         XPRNT DIVLINE,91       Prints DIVLINE output
+         XDECO 2,DREM           Format remainder for output
+         XPRNT DIVLINE,101      Prints DIVLINE output
+         A     13,=F'1'         Increment Division Count
+         B     AFTEROP          Goes back to loop
          SPACE
 ENDLOOP  DS    0C
          BR    14
@@ -93,7 +99,7 @@ MNUM2    DS    12C
          DC    C'        Product:   '
 MRES     DS    12C
          SPACE
-DIVLINE  DC    C'0'             Formats the DIVLINE output - 91 long
+DIVLINE  DC    C'0'             Formats the DIVLINE output - 101 long
          DC    C'Division       '
 DNUM1    DS    12C
 DNUM2    DS    12C

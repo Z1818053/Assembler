@@ -1,0 +1,233 @@
+                    J E S 2  J O B  L O G  --  S Y S T E M  S 0 W 1  --  N O D E  Z O S K C T R         
+
+ 
+21.11.44 JOB04421 ---- TUESDAY,   26 SEP 2017 ----
+21.11.44 JOB04421  IRR010I  USERID KC03I36  IS ASSIGNED TO THIS JOB.
+21.11.44 JOB04421  ICH70001I KC03I36  LAST ACCESS AT 21:11:44 ON TUESDAY, SEPTEMBER 26, 2017
+21.11.44 JOB04421  $HASP373 KC03I36A STARTED - INIT 2    - CLASS A        - SYS S0W1
+21.11.44 JOB04421  -                                         --TIMINGS (MINS.)--            ----PAGING COUNTS---
+21.11.44 JOB04421  -JOBNAME  STEPNAME PROCSTEP    RC   EXCP    TCB    SRB  CLOCK   SERV  PG   PAGE   SWAP    VIO SWAPS
+21.11.44 JOB04421  -KC03I36A                      00     63 ******    .00     .0    149   0      0      0      0     0
+21.11.44 JOB04421  -KC03I36A ENDED.  NAME-Tommy Franczak       TOTAL TCB CPU TIME=   .00  TOTAL ELAPSED TIME=    .0
+21.11.44 JOB04421  $HASP395 KC03I36A ENDED
+
+------ JES2 JOB STATISTICS ------
+
+
+  26 SEP 2017 JOB EXECUTION DATE
+
+
+          115 CARDS READ
+
+
+          185 SYSOUT PRINT RECORDS
+
+
+            0 SYSOUT PUNCH RECORDS
+
+
+           13 SYSOUT SPOOL KBYTES
+
+
+         0.00 MINUTES EXECUTION TIME
+!! END OF JES SPOOL FILE !!
+       1 //KC03I36A JOB ,'Tommy Franczak',MSGCLASS=H                             JOB04421
+       2 //STEP1 EXEC PGM=ASSIST                                                         
+       3 //STEPLIB DD DSN=KC02293.ASSIST.LOADLIB,DISP=SHR                                
+       4 //SYSPRINT DD SYSOUT=*                                                          
+       5 //SYSIN DD *                                                                    
+       6 //FT05F001 DD DSN=KC02314.AUTUMN17.CSCI360.HW3DATA,DISP=SHR                     
+       7 //                                                                              
+!! END OF JES SPOOL FILE !!
+ICH70001I KC03I36  LAST ACCESS AT 21:11:44 ON TUESDAY, SEPTEMBER 26, 2017
+IEF236I ALLOC. FOR KC03I36A STEP1
+IGD103I SMS ALLOCATED TO DDNAME STEPLIB
+IEF237I JES2 ALLOCATED TO SYSPRINT
+IEF237I JES2 ALLOCATED TO SYSIN
+IGD103I SMS ALLOCATED TO DDNAME FT05F001
+IEF142I KC03I36A STEP1 - STEP WAS EXECUTED - COND CODE 0000
+IGD104I KC02293.ASSIST.LOADLIB                       RETAINED,  DDNAME=STEPLIB 
+IEF285I   KC03I36.KC03I36A.JOB04421.D0000102.?         SYSOUT        
+IEF285I   KC03I36.KC03I36A.JOB04421.D0000101.?         SYSIN         
+IGD104I KC02314.AUTUMN17.CSCI360.HW3DATA             RETAINED,  DDNAME=FT05F001
+IEF373I STEP/STEP1   /START 2017269.2111
+IEF032I STEP/STEP1   /STOP  2017269.2111 
+        CPU:     0 HR  00 MIN  00.01 SEC    SRB:     0 HR  00 MIN  00.00 SEC    
+        VIRT:   584K  SYS:   264K  EXT:        4K  SYS:    11552K
+        ATB- REAL:                     0K  SLOTS:                     0K
+             VIRT- ALLOC:       0M SHRD:       0M
+IEF375I  JOB/KC03I36A/START 2017269.2111
+IEF033I  JOB/KC03I36A/STOP  2017269.2111 
+        CPU:     0 HR  00 MIN  00.01 SEC    SRB:     0 HR  00 MIN  00.00 SEC    
+!! END OF JES SPOOL FILE !!
+
+*** ASSIST 4.0/A2-05/15/82  470/V7A/0:OS/VS2  INS=SDFP7/X=BGHO, CHECK/TRC/=1180, OPTS=CDKMPR FROM PENN ST*NIU COMPSCI*LT            
+
+                                                                                                                                    
+
+                                                                                                               PAGE    1            
+
+  LOC  OBJECT CODE    ADDR1 ADDR2  STMT   SOURCE STATEMENT                                                                          
+                                      1 ********************************************                                                
+                                      2 * Assignment 3 - Pair Programmed                                                            
+                                      3 * Names: Tommy Franczak, Matt Rycraft                                                       
+                                      4 *                                                                                           
+                                      5 * Register Usage                                                                            
+                                      6 *                                                                                           
+                                      7 *  2,3   Num 1 - Even Odd Pair                                                              
+                                      8 *  4     Num 2                                                                              
+                                      9 *  9     Operation Type                                                                     
+                                     10 * 10     Addition Count                                                                     
+                                     11 * 11     Subtraction Count                                                                  
+                                     12 * 12     Multiplication Count                                                               
+                                     13 * 13     Division Count                                                                     
+                                     14 * 15     Base Register                                                                      
+                                     15 ********************************************                                                
+000000                               16 MAIN     CSECT                                                                              
+000000                               17          USING MAIN,15                                                                      
+000000 1BAA                          18          SR    10,10            Zero Operation Counts                                       
+000002 1BBB                          19          SR    11,11                                                                        
+000004 1BCC                          20          SR    12,12                                                                        
+000006 1BDD                          21          SR    13,13                                                                        
+000008 E000 F0BC 0050 000BC          22 LOOP     XREAD BUFFER,80                                                                    
+00000E 4740 F0BA            000BA    23          BC    B'0100',ENDLOOP  End loop if EOF reached                                     
+000012 1B22                          24          SR    2,2              Assure Even Odd Pair is zeroed                              
+000014 5390 F0BC            000BC    25          XDECI 9,BUFFER        Read operation type                                          
+000018 5331 0000            00000    26          XDECI 3,0(1)           Read first num                                              
+00001C 5341 0000            00000    27          XDECI 4,0(1)           Read second num                                             
+000020 5990 F248            00248    28          C     9,=F'1'         Is addition?                                                 
+000024 4780 F044            00044    29          BE    ADD                                                                          
+000028 5990 F24C            0024C    30          C     9,=F'2'         Is subtraction?                                              
+00002C 4780 F060            00060    31          BE    SUB                                                                          
+000030 5990 F250            00250    32          C     9,=F'3'         Is multiplication?                                           
+000034 4780 F07C            0007C    33          BE    MULT                                                                         
+000038 5990 F254            00254    34          C     9,=F'4'         Is division?                                                 
+00003C 4780 F09A            0009A    35          BE    DIV                                                                          
+000040 47F0 F008            00008    36 AFTEROP  B     LOOP             Back to top                                                 
+                                                                                                                                    
+000044 5230 F11C            0011C    38 ADD      XDECO 3,ANUM1          Format first num for output                                 
+000048 5240 F128            00128    39          XDECO 4,ANUM2          Format second num for output                                
+00004C 1A34                          40          AR    3,4              Add both nums                                               
+00004E 5230 F147            00147    41          XDECO 3,ARES           Format result for output                                    
+000052 E020 F10C 0047 0010C          42          XPRNT ADDLINE,71       Print ADDLINE                                               
+000058 5AA0 F248            00248    43          A     10,=F'1'         Increment Addition Count                                    
+00005C 47F0 F040            00040    44          B     AFTEROP          Goes back to loop                                           
+                                                                                                                                    
+000060 5230 F163            00163    46 SUB      XDECO 3,SNUM1          Format first num for output                                 
+000064 5240 F16F            0016F    47          XDECO 4,SNUM2          Format second num for output                                
+000068 1B34                          48          SR    3,4              Subtract both nums                                          
+00006A 5230 F18E            0018E    49          XDECO 3,SRES           Format result for output                                    
+00006E E020 F153 0047 00153          50          XPRNT SUBLINE,71       Print SUBLINE                                               
+000074 5AB0 F248            00248    51          A     11,=F'1'         Increment Subtraction Count                                 
+000078 47F0 F040            00040    52          B     AFTEROP          Goes back to loop                                           
+
+                                                                                                               PAGE    2            
+
+  LOC  OBJECT CODE    ADDR1 ADDR2  STMT   SOURCE STATEMENT                                                                          
+00007C 5230 F1AA            001AA    54 MULT     XDECO 3,MNUM1          Format first num for output                                 
+000080 5240 F1B6            001B6    55          XDECO 4,MNUM2          Format second num for output                                
+000084 1B22                          56          SR    2,2                                                                          
+000086 1C24                          57          MR    2,4              Multiply both nums                                          
+000088 5230 F1D5            001D5    58          XDECO 3,MRES           Format result for output                                    
+00008C E020 F19A 0047 0019A          59          XPRNT MULTLINE,71      Prints MULTLINE output                                      
+000092 5AC0 F248            00248    60          A     12,=F'1'         Increment Multiplication Count                              
+000096 47F0 F040            00040    61          B     AFTEROP          Goes back to loop                                           
+                                                                                                                                    
+00009A 5230 F1F1            001F1    63 DIV      XDECO 3,DNUM1          Format first num for output                                 
+00009E 5240 F1FD            001FD    64          XDECO 4,DNUM2          Format second num for output                                
+0000A2 1D24                          65          DR    2,4              Divide first num by second                                  
+0000A4 5230 F21C            0021C    66          XDECO 3,DRES           Format result for output                                    
+0000A8 5220 F23A            0023A    67          XDECO 2,DREM           Format remainder for output                                 
+0000AC E020 F1E1 0065 001E1          68          XPRNT DIVLINE,101      Prints DIVLINE output                                       
+0000B2 5AD0 F248            00248    69          A     13,=F'1'         Increment Division Count                                    
+0000B6 47F0 F040            00040    70          B     AFTEROP          Goes back to loop                                           
+                                                                                                                                    
+0000BA                               72 ENDLOOP  DS    0C                                                                           
+0000BA 07FE                          73          BR    14                                                                           
+0000BC                               74 BUFFER   DS    80C              Creates BUFFER variable                                     
+                                                                                                                                    
+00010C F0                            76 ADDLINE  DC    C'0'             Formats the ADDLINE output - 71 long                        
+00010D C1848489A3899695              77          DC    C'Addition       '                                                           
+00011C                               78 ANUM1    DS    12C                                                                          
+000128                               79 ANUM2    DS    12C                                                                          
+000134 4040404040404040              80          DC    C'        Sum:       '                                                       
+000147                               81 ARES     DS    12C                                                                          
+                                                                                                                                    
+000153 F0                            83 SUBLINE  DC    C'0'             Formats the SUBLINE output - 71 long                        
+000154 E2A482A3998183A3              84          DC    C'Subtraction    '                                                           
+000163                               85 SNUM1    DS    12C                                                                          
+00016F                               86 SNUM2    DS    12C                                                                          
+00017B 4040404040404040              87          DC    C'        Difference:'                                                       
+00018E                               88 SRES     DS    12C                                                                          
+                                                                                                                                    
+00019A F0                            90 MULTLINE DC    C'0'             Formats the MULTLINE output - 71 long                       
+00019B D4A493A389979389              91          DC    C'Multiplication:'                                                           
+0001AA                               92 MNUM1    DS    12C                                                                          
+0001B6                               93 MNUM2    DS    12C                                                                          
+0001C2 4040404040404040              94          DC    C'        Product:   '                                                       
+0001D5                               95 MRES     DS    12C                                                                          
+                                                                                                                                    
+0001E1 F0                            97 DIVLINE  DC    C'0'             Formats the DIVLINE output - 101 long                       
+0001E2 C489A589A2899695              98          DC    C'Division       '                                                           
+0001F1                               99 DNUM1    DS    12C                                                                          
+0001FD                              100 DNUM2    DS    12C                                                                          
+000209 4040404040404040             101          DC    C'        Quotient:  '                                                       
+00021C                              102 DRES     DS    12C                                                                          
+000228 4040404040404040             103          DC    C'        Remainder:'                                                        
+00023A                              104 DREM     DS    12C                                                                          
+                                    105          LTORG                  Sets the literal Origin                                     
+000248 00000001                     106                =F'1'                                                                        
+00024C 00000002                     107                =F'2'                                                                        
+000250 00000003                     108                =F'3'                                                                        
+000254 00000004                     109                =F'4'                                                                        
+                                                                                                                                    
+
+                                                                                                               PAGE    3            
+
+  LOC  OBJECT CODE    ADDR1 ADDR2  STMT   SOURCE STATEMENT                                                                          
+                                    111          END   MAIN                                                                         
+
+***  NO   STATEMENTS FLAGGED -  NO   WARNINGS,  NO   ERRORS                                                                         
+
+*** DYNAMIC CORE AREA USED:  LOW:    4988 HIGH:     884 LEAVING:  487696 FREE BYTES. AVERAGE:       52 BYTES/STMT ***               
+
+*** ASSEMBLY TIME =    0.000 SECS,   112000 STATEMENTS/SEC ***                                                                      
+
+*** PROGRAM EXECUTION BEGINNING - ANY OUTPUT BEFORE EXECUTION TIME MESSAGE IS PRODUCED BY USER PROGRAM ***                          
+
+Addition                987          45        Sum:               1032                                                              
+
+Multiplication:       12345           3        Product:          37035                                                              
+
+Multiplication:          -9         999        Product:          -8991                                                              
+
+Division               5890           4        Quotient:          1472        Remainder:           2                                
+
+Subtraction              38        9308        Difference:       -9270                                                              
+
+Addition               2468       -9753        Sum:              -7285                                                              
+
+Multiplication:          11          30        Product:            330                                                              
+
+Division               1977          24        Quotient:            82        Remainder:           9                                
+
+Addition               -450        -762        Sum:              -1212                                                              
+
+Division                  0          15        Quotient:             0        Remainder:           0                                
+
+Division                -25           3        Quotient:    1431655757        Remainder:           0                                
+
+Division                 25          -3        Quotient:            -8        Remainder:           1                                
+
+Subtraction            -465        -360        Difference:        -105                                                              
+
+Division                465         360        Quotient:             1        Remainder:         105                                
+
+Multiplication:        7783        8729        Product:       67937807                                                              
+
+Addition              10203       40506        Sum:              50709                                                              
+
+*** EXECUTION TIME =    0.001 SECS.       329 INSTRUCTIONS EXECUTED -   329000 INSTRUCTIONS/SEC ***                                 
+
+*** AM004 - NORMAL USER TERMINATION BY RETURN ***                                                                                   
+!! END OF JES SPOOL FILE !!
