@@ -1,4 +1,4 @@
-# ASSIGNMENT 3 - Mathematical Operations
+# Assignment 3 - Mathematical Operations
 
 TODO:
-*Header and footer
+* Header and footer
