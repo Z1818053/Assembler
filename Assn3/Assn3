@@ -6,7 +6,26 @@
 ********************************************
 * Assignment 3 - Pair Programmed
 * Names: Tommy Franczak, Matt Rycraft
-* 
+* *
+* Function: Take numbers from an input file and do a mathematical
+* operation on them
+*
+* Input: 3 lines of input are read in. First number is for which
+* mathematical operation should be done on the numbers. Second number
+* is the first number in the operation. Third number is the second
+* number for the operation.
+*
+* Output: The program will output the operation done, plus num 1 and 2
+* while also printing the results fromthe operation and any remainders
+* After all that is printed the operation counters will be printed
+* along with the total number of calculation done
+*
+* Entry Conds: The parameters passed to the rountines depend on the
+* input file
+*
+* Exit Conds: After the buffer reaches the EOF and all operations
+* have been completed
+*
 * Register Usage
 *
 *  2,3   Num 1 - Even Odd Pair
