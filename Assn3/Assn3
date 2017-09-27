@@ -27,7 +27,7 @@ MAIN     CSECT
          SR    14,14 
 LOOP     XREAD BUFFER,80
          BC    B'0100',ENDLOOP  End loop if EOF reached
-         XDECO 10,BUFFER        Read operation type
+         XDECI 10,BUFFER        Read operation type
          XDECI 3,0(1)           Read first num
          XDECI 4,0(1)           Read second num
          C     10,=F'1'         Is addition?
@@ -68,6 +68,7 @@ DIV      XDECO 3,DNUM1          Format first num for output
          XDECO 4,DREM           Format remainder for output
          XPRNT DIVLINE,91       Prints DIVLINE output
          SPACE
+ENDLOOP  DS    0C
          BR    14
 BUFFER   DS    80C              Creates BUFFER variable
          SPACE
@@ -102,7 +103,6 @@ DRES     DS    12C
 DREM     DS    12C
          LTORG                  Sets the literal Origin
          SPACE
-
          END   MAIN
 /*
 //FT05F001 DD DSN=KC02314.AUTUMN17.CSCI360.HW3DATA,DISP=SHR
