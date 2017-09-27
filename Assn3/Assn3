@@ -27,16 +27,16 @@ MAIN     CSECT
 LOOP     XREAD BUFFER,80
          BC    B'0100',ENDLOOP  End loop if EOF reached
          SR    2,2              Assure Even Odd Pair is zeroed
-         XDECI 9,BUFFER        Read operation type
+         XDECI 9,BUFFER         Read operation type
          XDECI 3,0(1)           Read first num
          XDECI 4,0(1)           Read second num
-         C     9,=F'1'         Is addition?
+         C     9,=F'1'          Is addition?
          BE    ADD
-         C     9,=F'2'         Is subtraction?
+         C     9,=F'2'          Is subtraction?
          BE    SUB
-         C     9,=F'3'         Is multiplication?
+         C     9,=F'3'          Is multiplication?
          BE    MULT
-         C     9,=F'4'         Is division?
+         C     9,=F'4'          Is division?
          BE    DIV  
 AFTEROP  B     LOOP             Back to top
          SPACE
@@ -67,7 +67,10 @@ MULT     XDECO 3,MNUM1          Format first num for output
          SPACE
 DIV      XDECO 3,DNUM1          Format first num for output
          XDECO 4,DNUM2          Format second num for output
-         DR    2,4              Divide first num by second
+         C     3,=F'0'          If !(NUM1 < 0)
+         BC    B'1011',POS      Num1 is positive
+         S     2,=F'1'          Negate first half of num1
+POS      DR    2,4              Divide first num by second
          XDECO 3,DRES           Format result for output
          XDECO 2,DREM           Format remainder for output
          XPRNT DIVLINE,101      Prints DIVLINE output
@@ -75,7 +78,7 @@ DIV      XDECO 3,DNUM1          Format first num for output
          B     AFTEROP          Goes back to loop
          SPACE
 ENDLOOP  DS    0C
-         BR    14
+         BR    14               Branches to end of program
 BUFFER   DS    80C              Creates BUFFER variable
          SPACE
 ADDLINE  DC    C'0'             Formats the ADDLINE output - 71 long
